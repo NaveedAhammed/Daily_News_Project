@@ -1,12 +1,16 @@
 import express from "express";
 import axios from 'axios';
+import dotenv from 'dotenv'
+
+dotenv.config();
+
 
 const date = new Date();
 const year = date.getFullYear();
 const month = date.getMonth();
 const day = date.getDate();
 const stringDate = `${year}-${month}-${day}`
-const apiKey = "a8171c5363334c009f725384adaf6166"
+const apiKey = process.env.API_KEY;
 
 const homePageUrl = `https://newsapi.org/v2/everything?sources=bbc-news&from=${stringDate}&sortBy=popularity&apiKey=${apiKey}`
 const topHeadlinesUrl = `https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=${apiKey}`
@@ -29,7 +33,8 @@ app.get("/", async (req, res) => {
                 mainArticle: topHeadlines.data.articles[0],
                 topArticles: topHeadlines.data.articles.slice(1),
                 headerTitle: "HOME",
-                title: "LATEST"
+                title: "LATEST",
+                year: year
             }
         );
     } catch (error) {
@@ -56,7 +61,8 @@ app.get("/categories/:name", async (req, res) => {
             {
                 articles: categoryNews.data.articles.slice(0, 30),
                 title: categoryName.toUpperCase(),
-                headerTitle: categoryName.toUpperCase()
+                headerTitle: categoryName.toUpperCase(),
+                year: year
             }
         )
     } catch (error) {
@@ -80,8 +86,9 @@ app.get("/search", async (req, res) => {
             "subSection",
             {
                 articles: searchNews.data.articles.slice(0, 30),
-                title: queryParam.toUpperCase(),
-                headerTitle: queryParam.toUpperCase()
+                title: "Search results for " + queryParam.toUpperCase(),
+                headerTitle: "SEARCH",
+                year: year
             }
         )
     } catch (error) {
@@ -106,8 +113,8 @@ app.get("/*", (req, res) => {
     )
 })
 
+const PORT = process.env.PORT || 8001;
 
-
-app.listen(8001, () => {
-    console.log("Server running at port 8001");
+app.listen(PORT, () => {
+    console.log("Server running at port " + `${PORT}`);
 });
