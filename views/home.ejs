@@ -1,0 +1,71 @@
+<%- include("./partials/header.ejs") -%>
+  <style>
+    @media(max-width: 720px) {
+      .carousel-item .card-text {
+        display: none;
+      }
+
+      .carousel-item .card-title {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+  </head>
+
+  <body>
+    <!-- NavBar -->
+    <%- include("./partials/navbar.ejs") -%>
+      <%- include("./partials/mainLinks.ejs") -%>
+        <div class="container mt-3">
+          <h1>TOP HEADLINES</h1>
+          <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" style="max-height: 75vh;">
+              <div class="carousel-item active">
+                <div style="position: relative;">
+                  <img src=<%=mainArticle.urlToImage %> class="d-block w-100" alt="image" style="filter:
+                  brightness(50%);">
+                  <div class="container p-5"
+                    style="width: 50%; position:absolute; z-index: 1; color: white; right: 10px; top: 30px;">
+                    <h5 class="card-title">
+                      <%=mainArticle.title %>
+                    </h5>
+                    <p class="card-text">
+                      <%=mainArticle.description %>
+                    </p>
+                    <a href="<%=mainArticle.url%>" target="_blank" class="btn btn-light">Read More</a>
+                  </div>
+                </div>
+              </div>
+              <% topArticles.forEach((article)=> { %>
+                <div class="carousel-item">
+                  <div style="position: relative;">
+                    <img src=<%=article.urlToImage %> class="d-block w-100" alt="image" style="filter:
+                    brightness(50%);">
+                    <div class="container p-5"
+                      style="width: 50%; position:absolute; z-index: 1; color: white; right: 10px; top: 30px;">
+                      <h5 class="card-title">
+                        <%= article.title %>
+                      </h5>
+                      <p class="card-text">
+                        <%= article.description %>
+                      </p>
+                      <a href="<%=article.url%>" target="_blank" class="btn btn-light">Read More</a>
+                    </div>
+                  </div>
+                </div>
+                <% }) %>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+        <%- include("./partials/utilSection.ejs") -%>
+          <%- include("./partials/footer.ejs") -%>

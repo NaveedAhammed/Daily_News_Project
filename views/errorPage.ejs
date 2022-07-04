@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        div {
+            width: 100vw;
+            height: 100vh;
+            background-color: beige;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 10rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 5rem;
+            font-weight: 500;
+        }
+
+        @media(max-width: 720px) {
+            html {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>
+            <%= statusCode %>
+        </h1>
+        <p>
+            <%= errorMessage %>
+        </p>
+    </div>
+</body>
+
+</html>
